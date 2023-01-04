@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
+    private int score = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,5 +32,15 @@ public class PlayerController : MonoBehaviour
             GetComponent<Rigidbody>().velocity = new Vector3(-speed, 0, 0);
         }
         
+    }
+
+    void OnTriggerEnter(Collider other) 
+    {
+        if (other.tag == "Pickup")
+        {
+            score += 1;
+            Destroy(other.gameObject);
+            Debug.Log("Score: " + score);
+        }
     }
 }
